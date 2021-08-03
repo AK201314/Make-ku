@@ -22,10 +22,10 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: lede.config
-  DIY_P1_SH: diy-lede1.sh
-  DIY_P2_SH: diy-lede2.sh
+  FEEDS_CONF: Lede/feeds.conf.default
+  CONFIG_FILE: Lede/.config
+  DIY_P1_SH: Lede/diy-part1.sh
+  DIY_P2_SH: Lede/diy-part2.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
@@ -76,7 +76,7 @@ jobs:
 
     - name: Load custom configuration
       run: |
-        [ -e ledefiles ] && mv ledefiles openwrt/files
+        [ -e Lede/files ] && mv Lede/files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
