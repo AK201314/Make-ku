@@ -22,10 +22,10 @@ on:
 env:
   REPO_URL: https://github.com/Lienol/openwrt
   REPO_BRANCH: 19.07
-  FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: lienol.config
-  DIY_P1_SH: diy-lienol1.sh
-  DIY_P2_SH: diy-lienol2.sh
+  FEEDS_CONF: Lienol/feeds.conf.default
+  CONFIG_FILE: Lienol/.config
+  DIY_P1_SH: Lienol/diy-part1.sh
+  DIY_P2_SH: Lienol/diy-part2.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
@@ -76,7 +76,7 @@ jobs:
 
     - name: Load custom configuration
       run: |
-        [ -e lienolfiles ] && mv lienolfiles openwrt/files
+        [ -e Lienol/files ] && mv Lienol/files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
