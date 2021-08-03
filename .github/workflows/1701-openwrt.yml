@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build OpenWrt
+name: 1701-openwrt
 
 on:
   repository_dispatch:
@@ -23,9 +23,9 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/openwrt
   REPO_BRANCH: lede-17.01
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: 1701.config
-  DIY_P1_SH: diy-17011.sh
-  DIY_P2_SH: diy-17012.sh
+  CONFIG_FILE: 1701/.config
+  DIY_P1_SH: 1701/diy-part1.sh
+  DIY_P2_SH: 1701/diy-part2.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
@@ -76,7 +76,7 @@ jobs:
 
     - name: Load custom configuration
       run: |
-        [ -e 1701files ] && mv 1701files openwrt/files
+        [ -e 1701/files ] && mv 1701/files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
