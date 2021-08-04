@@ -62,7 +62,7 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: 读取自定义文件
+    - name: 读取自定义文件1
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
@@ -82,11 +82,12 @@ jobs:
         cp -Rf openwrt-package/* ./ && rm -rf openwrt-package
         git clone https://github.com/fw876/helloworld package/luci-app-ssr-plus
         git clone https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
+        ./scripts/feeds update -a > /dev/null 2>&1
 
     - name: 安装源码插件源
       run: |
         cd openwrt
-        ./scripts/feeds update -a && ./scripts/feeds install -a
+        ./scripts/feeds install -a && ./scripts/feeds install -a
 
     - name: 读取自定义文件2
       run: |
