@@ -90,6 +90,7 @@ jobs:
     - name: 读取自定义文件2
       run: |
         [ -e Lede/files ] && mv Lede/files openwrt/files
+        [ -e Lede/diy ] && cp -Rf Lede/diy/* ./
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
