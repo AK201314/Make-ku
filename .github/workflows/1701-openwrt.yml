@@ -81,11 +81,12 @@ jobs:
         rm -rf feeds/packages/libs/libcap
         git clone --depth 1 -b "${REPO_BRANCH}" https://github.com/281677160/openwrt-package
         cp -Rf openwrt-package/* ./ && rm -rf openwrt-package
+        ./scripts/feeds update -a > /dev/null 2>&1
 
     - name: 安装源码插件源
       run: |
         cd openwrt
-        ./scripts/feeds update -a && ./scripts/feeds install -a
+        ./scripts/feeds install -a && ./scripts/feeds install -a
 
     - name: 读取自定义文件2
       run: |
