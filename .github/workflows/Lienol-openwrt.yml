@@ -82,11 +82,11 @@ jobs:
         cp -Rf openwrt-package/* ./ && rm -rf openwrt-package
         git clone https://github.com/fw876/helloworld package/luci-app-ssr-plus
         git clone https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
-        ./scripts/feeds update -a > /dev/null 2>&1
 
     - name: 安装源码插件源
       run: |
         cd openwrt
+        ./scripts/feeds update -a
         ./scripts/feeds install -a > /dev/null 2>&1
         ./scripts/feeds install -a
 
@@ -139,7 +139,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: OpenWrt_bin-${{ env.TARGET_PROFILE }}${{ env.FILE_DATE }}
+        name: Lienol-bin-${{ env.TARGET_PROFILE }}${{ env.FILE_DATE }}
         path: openwrt/bin
 
     - name: 整理BIN文件夹
@@ -156,7 +156,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt-firmware-${{ env.TARGET_PROFILE }}${{ env.FILE_DATE }}
+        name: Lienol-${{ env.TARGET_PROFILE }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: 上传固件至cowtransfer
